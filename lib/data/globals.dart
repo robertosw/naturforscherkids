@@ -51,16 +51,18 @@ class Globals {
   /// Diese Funktion entscheidet auf welcher Seite die App nach Login beginnt <br>
   String getRouteForRole() {
     // Keine Rolle ausgewählt -> App zum ersten mal gestartet -> Auswahlbildschirm
-    if (userData.activeRole == null || userData.username == null) {
-      return '/login';
-    }
+    // if (userData.activeRole == null || userData.username == null) {
+    //   return '/login';
+    // }
 
-    // Rolle ausgewählt & Daten vorhanden -> Startbildschirm der Rolle
-    if (userData.activeRole == Role.explorer) {
-      return '/explorer_home';
-    } else {
-      return '/instructor_home';
-    }
+    // // Rolle ausgewählt & Daten vorhanden -> Startbildschirm der Rolle
+    // if (userData.activeRole == Role.explorer) {
+    //   return '/explorer_home';
+    // } else {
+    //   return '/instructor_home';
+    // }
+
+    return '/explorer_home';
   }
 
   void buildLexiconForUser() {

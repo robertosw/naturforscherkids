@@ -84,33 +84,34 @@ class UserData {
 
     try {
       // ------------------- Response verarbeiten ------------------- //
-      if (response.data == null) return "Keine Daten vom Server erhalten";
+      // if (response.data == null) return "Keine Daten vom Server erhalten";
 
       // --------------- Statuscode in 200er Bereich? --------------- //
-      if (response.statusCode! < 200 || response.statusCode! >= 300) return "Unerwarteter Statuscode ${response.statusCode}";
+      // if (response.statusCode! < 200 || response.statusCode! >= 300) return "Unerwarteter Statuscode ${response.statusCode}";
 
-      Map responseData = json.decode(response.data);
-      debugPrint("login response: $responseData");
-      String status = responseData["status"];
+      // Map responseData = json.decode(response.data);
+      // debugPrint("login response: ${response.data}");
+      // String status = response.data["status"];
 
       // ----------------------- Statuscheck ----------------------- //
-      if (status != "success") return "Nutzer existiert nicht";
+      // if (status != "success") return "Nutzer existiert nicht";
 
       // ----- Stimmen angebene Daten und Serverdaten überein? ----- //
-      String tempRole = responseData["role"];
-      String usernameServer = responseData["username"];
+      // String tempRole = response.data["role"];
+      // String usernameServer = response.data["username"];
 
-      Role roleServer = (tempRole.contains("teacher")) ? Role.instructor : Role.explorer;
-      if (roleServer != Globals().userData.activeRole || Globals().userData.username != usernameServer) {
-        return "Falsche Rolle";
-      }
+      // Role roleServer = (tempRole.contains("teacher")) ? Role.instructor : Role.explorer;
+      // if (roleServer != Globals().userData.activeRole || Globals().userData.username != usernameServer) {
+      //   return "Falsche Rolle";
+      // }
 
       // Alles bestanden  -> Speichern
-      userId = int.parse(responseData["person_id"]);
-      userSecret = responseData["secret"];
+      userId = int.parse(response.data["person_id"]);
+      username = "MeierSu"; // Das war nicht so in der vollständigen App
+      userSecret = response.data["secret"];
 
       // Die IDs der Gruppen in welchen man Mitglied ist erhalten. Immer Array[int]
-      List<dynamic> temp = responseData["groups"];
+      List<dynamic> temp = response.data["groups"];
       for (var element in temp) {
         UserData().groupIDs.add(int.parse(element));
       }

@@ -126,12 +126,18 @@ class UIGardenCard extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Row(
             children: [
-              Container(
-                height: 50,
-                width: 50,
-                padding: const EdgeInsets.all(6),
-                child: getColorCodedPlantImage(),
+              SizedBox.square(
+                dimension: 50,
+                child: Icon(Icons.local_florist_outlined, color: Colors.grey.shade900),
               ),
+
+              // Eigentlich war hier ein Bild der Pflanze aus Unity, statt dem Icon, zu sehen:
+              // Container(
+              //   height: 50,
+              //   width: 50,
+              //   padding: const EdgeInsets.all(6),
+              //   child: getColorCodedPlantImage(),
+              // ),
               const SizedBox.square(dimension: 5),
               Expanded(
                 child: Column(

@@ -118,10 +118,10 @@ class _PageLoginState extends State<PageLogin> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Der Name darf nur aus Buchstaben und Zahlen bestehen und muss länger als $_minInputLen Zeichen sein."),
+            const Text("In dieser Version muss kein Nutzername angegeben werden, da die App vollständig offline funktioniert.\n\nZum Fortfahren einfach 'Anmelden' drücken."),
             const SizedBox(height: 10),
             TextField(
-              decoration: const InputDecoration(border: UnderlineInputBorder(), hintText: "Nutzername"),
+              decoration: const InputDecoration(border: UnderlineInputBorder(), hintText: "Kein Nutzername notwendig!"),
               onChanged: (text) => Globals().userData.username = text,
               inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[\w\d]'))],
             ),
@@ -171,10 +171,10 @@ class _PageLoginState extends State<PageLogin> {
   }
 
   void _onTapLogin() async {
-    if (Globals().userData.username == null || Globals().userData.username!.length <= _minInputLen) {
-      _displayLoginError("Nutzername ist zu kurz");
-      return;
-    }
+    // if (Globals().userData.username == null || Globals().userData.username!.length <= _minInputLen) {
+    //   _displayLoginError("Nutzername ist zu kurz");
+    //   return;
+    // }
 
     // App-interne Bedingungen bestanden -> UI auf Step 3
     setState(() {

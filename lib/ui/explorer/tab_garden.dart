@@ -102,7 +102,7 @@ class _GardenEmptyState extends State<ExplorerTabGarden> {
   @override
   Widget build(BuildContext context) {
     return NaturfkPage(
-      body: const Center(child: Text("Unity Garten hier :D")),
+      body: const Center(child: Text("Hier war der Unity Garten zu sehen")),
       bottomRow: NaturfkBottomRow3(
         center: NaturfkTextButton(
           text: "Inventar",
