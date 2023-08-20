@@ -32,13 +32,24 @@ class Inventory {
 
   Future<Response?> _getInventory() async {
     try {
-      Response response = await Dio().get(
-        "https://tracktrain.azurewebsites.net/Naturforscher/api.php",
-        queryParameters: {'command': "get_inventory", 'user': UserData().userId.toString()},
-      );
+      // Response response = await Dio().get(
+      //   "https://tracktrain.azurewebsites.net/Naturforscher/api.php",
+      //   queryParameters: {'command': "get_inventory", 'user': UserData().userId.toString()},
+      // );
+
+      Response response = Response(requestOptions: RequestOptions());
+      response.data = {
+        "inventory": [
+          {"name": "Gänseblümchen", "pflanzen_id": "3", "inventar_id": "1", "wasserlevel": "1", "anzahl": "2", "garden": true},
+          {"name": "Echte Kamille", "pflanzen_id": "2", "inventar_id": "2", "wasserlevel": "0", "anzahl": "23", "garden": true},
+          {"name": "Löwenzahn", "pflanzen_id": "1", "inventar_id": "6", "wasserlevel": "0", "anzahl": "1", "garden": false},
+          {"name": "Rot-Schwingel", "pflanzen_id": "12", "inventar_id": "7", "wasserlevel": "0", "anzahl": "1", "garden": true},
+          {"name": "Unbekannt", "pflanzen_id": "999", "inventar_id": "66", "wasserlevel": "0", "anzahl": "1", "garden": true}
+        ]
+      };
 
       return response;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint("DioError - Inventory: $e");
     } catch (e) {
       debugPrint("Allgemeiner Fehler - Inventory Anfrage: $e");
@@ -49,13 +60,26 @@ class Inventory {
 
   Future<Response?> _getLayout() async {
     try {
-      Response response = await Dio().get(
-        "https://tracktrain.azurewebsites.net/Naturforscher/api.php",
-        queryParameters: {'command': "get_layout", 'userid': UserData().userId},
-      );
+      // Response response = await Dio().get(
+      //   "https://tracktrain.azurewebsites.net/Naturforscher/api.php",
+      //   queryParameters: {'command': "get_layout", 'userid': UserData().userId},
+      // );
+
+      Response response = Response(requestOptions: RequestOptions());
+      response.data = {
+        {
+          "beets": [
+            {"Nummer": "3", "Name": "Gänseblümchen", "Farbe": "white"},
+            {"Nummer": "20", "Name": "Echte Kamille", "Farbe": "white"},
+            {"Nummer": "2", "Name": "Rot-Schwingel", "Farbe": "grass_green"},
+            {"Nummer": "3", "Name": "Unbekannt", "Farbe": "unknown"}
+          ],
+          "userid": "1"
+        }
+      };
 
       return response;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint("DioError - Pflanzenfarben: $e");
     } catch (e) {
       debugPrint("Allgemeiner Fehler - Pflanzenfarben-Anfrage: $e");

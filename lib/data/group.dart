@@ -28,10 +28,19 @@ class GroupManager {
     // Überprüfen: Wenn man in zwei Gruppen ist, umfasst die Reponse dann Mitglieder beider Gruppen?
 
     try {
-      Response response = await Dio().get(
-        "https://tracktrain.azurewebsites.net/Naturforscher/api.php",
-        queryParameters: {'command': "get_groupmember", 'username': UserData().username},
-      );
+      // Response response = await Dio().get(
+      //   "https://tracktrain.azurewebsites.net/Naturforscher/api.php",
+      //   queryParameters: {'command': "get_groupmember", 'username': UserData().username},
+      // );
+
+      // Nutzername in Request war "MeierSu"
+      Response response = Response(requestOptions: RequestOptions());
+      response.data = {
+        "members": [
+          {"first_name": "Paul", "last_name": "Müller", "username": "muellePa", "person_id": "1"},
+          {"first_name": "Tom", "last_name": "Klein", "username": "KleinTo", "person_id": "3"}
+        ]
+      };
 
       List<dynamic> data = response.data['members'];
 
@@ -45,7 +54,7 @@ class GroupManager {
       }
 
       return;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       debugPrint("DioError - Inventory: $e");
     } catch (e) {
       debugPrint("Allgemeiner Fehler - Inventory Anfrage: $e");
@@ -66,10 +75,22 @@ class GroupManager {
   /// Bei Neuaufruf werden alte Daten verworfen
   Future<void> getAllGroupsFromServerAnonymous() async {
     serverGroups.clear();
-    Response response = await Dio().get(
-      "https://tracktrain.azurewebsites.net/Naturforscher/api.php",
-      queryParameters: {'command': "get_groups"},
-    );
+
+    // Response response = await Dio().get(
+    //   "https://tracktrain.azurewebsites.net/Naturforscher/api.php",
+    //   queryParameters: {'command': "get_groups"},
+    // );
+
+    Response response = Response(requestOptions: RequestOptions());
+    response.data = {
+      "groups": [
+        {"gruppen_id": "1", "name": "Testgruppe"},
+        {"gruppen_id": "2", "name": "Klasse 2 (Sachkunde)"},
+        {"gruppen_id": "3", "name": "Klasse 3 (Sachkunde)"},
+        {"gruppen_id": "4", "name": "Klasse 4 (Sachkunde)"}
+      ]
+    };
+
     debugPrint("GroupsAll Element 1:  ${response.data['groups'][0]}");
 
     List<dynamic> temp = response.data['groups'];

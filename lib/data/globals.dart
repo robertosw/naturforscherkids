@@ -37,11 +37,11 @@ class Globals {
     // Future.wait sorgt dafür das alle darin enthaltenen async Funktionen multithreaded aufgerufen und abgewartet werden
     // Hier also aufpassen, dass die Funktionen nicht gegenseitig auf den gleichen Variablen schreiben oder die eine schreibt und die andere ließt
     await Future.wait([
-      GroupManager().getAllGroupsFromServerAnonymous(),
-      GroupManager().getGroupMembersFromServerLoggedIn(),
-      Inventory().serverRequestInventoryLoggedIn(),
-      Inventory().serverRequestGardenLayoutLoggedIn(),
-      Lexicon().serverRequestLexiconAnonymous(),
+      GroupManager().getAllGroupsFromServerAnonymous(), //
+      GroupManager().getGroupMembersFromServerLoggedIn(), //
+      Inventory().serverRequestInventoryLoggedIn(), //
+      Inventory().serverRequestGardenLayoutLoggedIn(), //
+      Lexicon().serverRequestLexiconAnonymous(), //
       Missions().serverRequestAllMissionsAnonymous(),
     ]);
     GroupManager().fillJoinedGroupsFromServerGroupsLoggedIn();

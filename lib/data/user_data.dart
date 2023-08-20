@@ -57,13 +57,23 @@ class UserData {
   Future<String> loginUserAndSavePersonalData() async {
     late Response? response;
     try {
-      response = await Dio().get(
-        "https://tracktrain.azurewebsites.net/Naturforscher/api.php",
-        queryParameters: {
-          'command': 'login',
-          'username': Globals().userData.username,
-        },
-      );
+      // response = await Dio().get(
+      //   "https://tracktrain.azurewebsites.net/Naturforscher/api.php",
+      //   queryParameters: {
+      //     'command': 'login',
+      //     'username': Globals().userData.username,
+      //   },
+      // );
+
+      response = Response(requestOptions: RequestOptions());
+      response.data = {
+        "status": "success",
+        "person_id": "2",
+        "username": "MeierSu",
+        "secret": "Xr53\\_4+9ugp_,ba",
+        "role": "student",
+        "groups": ["2"]
+      };
     } on FormatException catch (_) {
       debugPrint("Serverantwort hat unerwartetes Format");
       return "Serverantwort hat unerwartetes Format";
